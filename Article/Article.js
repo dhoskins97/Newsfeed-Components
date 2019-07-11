@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'I added this one.',
+    date: 'Jun 30th, 2019',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pharetra, tortor ut volutpat volutpat, justo massa placerat felis, eget dapibus nisl purus vitae velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam velit magna, auctor vel leo vitae, luctus ullamcorper turpis. Praesent ac ipsum est. Proin ullamcorper eros fringilla posuere congue. `,
+
+    secondParagraph: `Phasellus vel blandit tortor, et porta elit. Vestibulum quis leo sed sapien gravida convallis et eget ex. Aenean dapibus, diam nec vehicula interdum, dui mi venenatis velit, eu pellentesque purus augue eu metus. Maecenas eu varius ex. In hac habitasse platea dictumst. Vestibulum accumsan tellus purus, in fringilla purus mollis sed. `,
+
+    thirdParagraph: `Etiam auctor dapibus orci, quis aliquam ex porttitor a. Aliquam sagittis lectus eu aliquam facilisis. Curabitur placerat dictum ex. Aliquam et blandit nunc. Fusce congue erat vitae efficitur lobortis. Integer tristique, ipsum ut imperdiet bibendum, ligula urna consectetur felis, quis posuere arcu leo sollicitudin diam.`
   }
 ];
 
@@ -101,14 +110,58 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+*/
 
+
+
+const godFunction = function(title, date, content1, content2, content3){
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleContent1 = document.createElement('p');
+  const articleContent2 = document.createElement('p');
+  const articleContent3 = document.createElement('p');
+  const articleButton = document.createElement('span');
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleContent1);
+  article.appendChild(articleContent2);
+  article.appendChild(articleContent3);
+  article.appendChild(articleButton);
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  articleButton.classList.add('expandButton');
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleContent1.textContent = content1;
+  articleContent2.textContent = content2;
+  articleContent3.textContent = content3;
+  articleButton.textContent = 'Expand';
+
+  articleButton.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+  })
+
+  return article;
+}
+
+const articlesDiv = document.querySelector('.articles');
+
+data.forEach(elem => {
+  articlesDiv.appendChild(godFunction(elem.title, elem.date, elem.firstParagraph, elem.secondParagraph, elem.thirdParagraph))
+})
+
+/*
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
 
 */
